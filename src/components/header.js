@@ -30,14 +30,25 @@ import React, {Component} from 'react';
 //class component with state
 class Header extends Component {
     
+    inputChangeHandler(event) {
+        console.log(event.target.value)
+    }
+    
+    inputWithParamsHandler(event, name) {
+        console.log(event.target.value)
+        console.log(name + event.target.value)
+    }
     
     render() {
         return(
-            <header>
-                <div>
-                    <div className="logo">Logo</div>
-                    <input type="text" />
-                </div>
+            <header
+                onClick={() => console.log("header clicked")}
+            >
+               
+                <div className="logo">Logo</div>
+                <input onChange={this.inputChangeHandler} type="text" />
+                {/* to pass in multiple params must use an encapsulating function and pass in the event */}
+                <input onChange={(event) => this.inputWithParamsHandler(event, "Artul")} type="text" />
                 
             </header>
             
