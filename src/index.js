@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Header from "./components/header";
+import './styles-css/style.css';
 
 const App = () => (
     <>
-        <h1>hello1</h1>
-        <h2>hello1</h2>
+        <Header />
     </>
 )
     
