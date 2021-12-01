@@ -6,21 +6,25 @@ import dbJSON from './styles-css/db.json'
 import Header from "./components/header";
 import NewsList from 
 "./components/news_list.js"
+import Footer from "./components/footer";
 
 class App extends Component {
     
     state = {
-        news: dbJSON
+        news: dbJSON,
+        footerText: 'Here is the footer.'
     }
 
     render() {
-        console.log(this.state.news)
+        const {news, footerText} = this.state;
+
         return (
             <>
                 <Header />
                 <NewsList 
-                    news={this.state.news}
+                    news={news}
                 />
+                <Footer footerText={footerText} />
             </>
         )
         
