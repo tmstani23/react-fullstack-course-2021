@@ -1,53 +1,32 @@
 import React, {Component} from 'react';
 
-//standard functional component
-// const Header = () => {
-    
-//     const getTheYear = () => {
-//         const newDate = new Date();
-//         return newDate.getFullYear();
-//     }
-    
-//     return (
-//         <div>
-//             The date is {getTheYear()}
-//         </div>
-//      )
-// };
-
-// CSS styles as object
-// let styles = {
-//     header: {
-//         background: "#03a9fa"
-//     },
-//     logo: {
-//         color: '#fff',
-//         fontFamily: 'Open Sans Condensed',
-//         textAlign: 'center'
-//     }
-// }
-
 //class component with state
 class Header extends Component {
     
     state = {
-        
+        active: 'active',
         keywords: '',
     }
 
     inputChangeHandler = (event) => {
-        
+        const value = event.target.value === '' ? 'active' : 'not-active';
+
         this.setState({
+            active: value,
             keywords: event.target.value
         })
     }
 
     
     render() {
+        
+        //let backgroundSwap = this.state.active ? 'blue' : 'red';
+        
         return(
-            <header
-                onClick={() => console.log("header clicked")}
-            >
+            // <header style={{background: `${backgroundSwap}`}}>
+            
+            <header className={this.state.active}>
+
                
                 <div className="logo">Logo</div>
                 <input onChange={this.inputChangeHandler} type="text" />
