@@ -12,16 +12,29 @@ class App extends Component {
     
     state = {
         news: dbJSON,
+        filteredNews: dbJSON,
         footerText: 'Here is the footer.'
     }
 
+    getKeywords = (event) => {
+        
+        let keywords = event.target.value;
+        let filtered = this.state.news.filter((item) => {
+            //return the item that contains a user entered keyword in its title
+            return item.title.indexOf(keywords) > -1
+        })
+        this.setState({
+            filteredNews: filtered
+        })
+    }
+
     render() {
-        const {news, footerText} = this.state;
+        const {news, filteredNews, footerText} = this.state;
 
         return (
             <>
-                <Header />
-                <NewsList news={news}> 
+                <Header keywordsFunc = {this.getKeywords} />
+                <NewsList news={filteredNews}> 
                     <br/>
                     <h1>I am a child of newsList </h1>
                     

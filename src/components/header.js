@@ -1,41 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 //class component with state
-class Header extends Component {
-    
-    state = {
-        active: 'active',
-        keywords: '',
-    }
-
-    inputChangeHandler = (event) => {
-        const value = event.target.value === '' ? 'active' : 'not-active';
-
-        this.setState({
-            active: value,
-            keywords: event.target.value
-        })
-    }
-
-    
-    render() {
+const Header = (props) => {
         
-        //let backgroundSwap = this.state.active ? 'blue' : 'red';
-        
-        return(
-            // <header style={{background: `${backgroundSwap}`}}>
-            
-            <header className={this.state.active}>
+    return(
+
+            <header>
 
                
                 <div className="logo">Logo</div>
-                <input onChange={this.inputChangeHandler} type="text" />
-                {/* to pass in multiple params must use an encapsulating function and pass in the event */}
-                {/* <input onChange={(event) => this.inputWithParamsHandler(event, "Artul")} type="text" /> */}
+                <input onChange={props.keywordsFunc} type="text" />
             </header>
             
         )
-    }
 }
 
 export default Header;
