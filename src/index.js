@@ -31,7 +31,7 @@ class App extends Component {
     }
 
     render() {
-        const {news, filteredNews, footerText} = this.state;
+        const {filteredNews, footerText} = this.state;
 
         return (
             <>
