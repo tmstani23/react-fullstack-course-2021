@@ -7,13 +7,15 @@ import Header from "./components/header";
 import NewsList from 
 "./components/news_list.js"
 import Footer from "./components/footer";
+import Life from "./components/lifecycle";
 
 class App extends Component {
     
     state = {
         news: dbJSON,
         filteredNews: dbJSON,
-        footerText: 'Here is the footer.'
+        footerText: 'Here is the footer.',
+        active: true
     }
 
     getKeywords = (event) => {
@@ -39,6 +41,13 @@ class App extends Component {
                     <h1>I am a child of newsList </h1>
                     
                 </ NewsList>
+                { this.state.active ? <Life /> : null }
+                
+                <button onClick={(event) => 
+                    this.setState({active: !this.state.active})
+                }>Action
+
+                </button>
                 <Footer footerText={footerText} />
             </>
         )
