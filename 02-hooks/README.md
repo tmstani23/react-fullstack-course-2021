@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with React Hooks
 
 This part of the course demonstrates hooks, useState, useEffect and React context API
 
