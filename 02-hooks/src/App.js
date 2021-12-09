@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
+import Post from './post'
 
 const App = ({initialCount}) => {
 
@@ -37,6 +38,20 @@ const App = ({initialCount}) => {
     ])
   }
 
+  const removePosts = () => {
+    setPosts([]);
+  }
+
+  useEffect (() => {
+    //console.log('change on state and posts')
+    // second arg to use effect will specify when it should be triggered.  For example when a state property changes
+  }, [state, posts]) 
+
+  useEffect (() => {
+    console.log('mounted')
+    // similar to component did mount if second arg is empty.  Only updates when component first mounts.
+  }, []) 
+
   return (
     <>
       <h1>{state.user}</h1>
@@ -46,16 +61,13 @@ const App = ({initialCount}) => {
         count: state.count + 1
       })}>Add one</button>
       <button onClick={subtractOne}>Subtract one</button>
-      {/* <button onClick={() => setCount(initialCount)}>Reset count</button> */}
+      <button onClick={removePosts}>Remove a post</button>
 
       <hr />
 
       {
         posts.map((item, i) => (
-          <div key = {i}>
-            <h1>Name: {item.name}</h1>
-            <h3>Body: {item.body}</h3>
-          </div>
+          <Post item={item} key={i}/>
         ))
       }
 
