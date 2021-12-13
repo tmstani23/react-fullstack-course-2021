@@ -1,80 +1,33 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useCallback} from 'react';
 
-import Post from './post'
+import Title from './components/title';
+import Count from './components/count';
+import CountBtn from './components/count_btn';
+import Age from './components/age';
+import AgeBtn from './components/age_btn';
 
-const App = ({initialCount}) => {
+const App = () => {
 
-  let [state, setState] = useState({
-    count: initialCount,
-    user: "Timothy"
-  });
+  const [count, setCount] = useState(0);
+  const [age, setAge] = useState(10);
 
-  let [posts, setPosts] = useState([
-    {
-      name: 'Super awesome post',
-      body: 'The content of the post'
-    },
-    {
-      name: 'titanium',
-      body: `shoot me down but I won't fall.  I am titanium`
-    },
-  ])
+  //useCallback prevents the function from being recreated unless the a dependency prop is updated
+  let handleCount = useCallback(() => {
+    setCount(prevCount => prevCount + 1);
+    // since we are updating the previous state the dependency array doesn't update.  This will prevent the function from re-rendering
+  }, []); 
 
-  const subtractOne = () => {
-    setState({
-      ...state,
-      count: state.count - 1
-    });
-  }
-
-  const addPosts = () => {
-    let newPost = {
-      name: 'Legend',
-      body: `When I die I want to be a legend.`
-    }
-    return setPosts([
-      ...posts,
-      newPost
-    ])
-  }
-
-  const removePosts = () => {
-    setPosts([]);
-  }
-
-  useEffect (() => {
-    //console.log('change on state and posts')
-    // second arg to use effect will specify when it should be triggered.  For example when a state property changes
-  }, [state, posts]) 
-
-  useEffect (() => {
-    console.log('mounted')
-    // similar to component did mount if second arg is empty.  Only updates when component first mounts.
-  }, []) 
+  let handleAge = useCallback(() => {
+    setAge(prevAge => prevAge + 1);
+  }, []);
 
   return (
     <>
-      <h1>{state.user}</h1>
-      <h3>Count: {state.count}</h3>
-      <button onClick={() => setState({
-        ...state,
-        count: state.count + 1
-      })}>Add one</button>
-      <button onClick={subtractOne}>Subtract one</button>
-      <button onClick={removePosts}>Remove a post</button>
-
-      <hr />
-
-      {
-        posts.map((item, i) => (
-          <Post item={item} key={i}/>
-        ))
-      }
-
-      <button onClick={addPosts}>
-        Add new post
-      </button>
-
+      <Title />
+      <Count count={count} />
+      <CountBtn handleCount={handleCount} />
+      <Age age={age} />
+      <AgeBtn handleAge={handleAge} />
     </>
   );
 }
