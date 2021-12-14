@@ -1,35 +1,30 @@
-import React, {useState, useCallback} from 'react';
-
-import Title from './components/title';
-import Count from './components/count';
-import CountBtn from './components/count_btn';
-import Age from './components/age';
-import AgeBtn from './components/age_btn';
+import React, {useRef} from 'react';
 
 const App = () => {
 
-  const [count, setCount] = useState(0);
-  const [age, setAge] = useState(10);
+  const textInput = useRef();
 
-  //useCallback prevents the function from being recreated unless the a dependency prop is updated
-  let handleCount = useCallback(() => {
-    setCount(prevCount => prevCount + 1);
-    // since we are updating the previous state the dependency array doesn't update.  This will prevent the function from re-rendering
-  }, []); 
+  const triggerHandler = () => {
+    console.log(textInput.current.value)
+  }
+  
 
-  let handleAge = useCallback(() => {
-    setAge(prevAge => prevAge + 1);
-  }, []);
+    return (    
+      <>
+        <h1>Form:</h1>
+        <InputComponent ref={textInput} />
+        <button onClick = {triggerHandler}>Trigger function</button>
+      </>
+    )
 
-  return (
-    <>
-      <Title />
-      <Count count={count} />
-      <CountBtn handleCount={handleCount} />
-      <Age age={age} />
-      <AgeBtn handleAge={handleAge} />
-    </>
-  );
 }
 
+//note: cannot directly pass references as props to a component.  Must use forwardRef as below
+const InputComponent = React.forwardRef((props, ref) => {
+  return (
+    <input type="text" ref={ref}/>
+  )
+})
+ 
 export default App;
+
