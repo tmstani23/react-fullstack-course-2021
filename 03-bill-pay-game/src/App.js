@@ -5,7 +5,7 @@ import './App.css';
 import {GlobalContext} from './context/';
 import StageIntro from './components/stage_intro';
 import StageResult from './components/stage_result';
-import { Button } from 'react-bootstrap';
+
 
 class App extends Component {
   
