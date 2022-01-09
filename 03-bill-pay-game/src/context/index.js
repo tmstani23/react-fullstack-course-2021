@@ -39,8 +39,30 @@ class GlobalProvider extends Component {
                 autoClose: 3000
             })
         } else {
-            console.log('move to stage 2');
+            this.setState({
+                stage: 2
+            }, ()=> {
+                setTimeout(() => {
+                    this.generateLoser();
+                }, 1000);
+            })
         }
+    }
+
+    generateLoser = () => {
+        const {players} = this.state;
+
+        this.setState({
+            result: players[Math.floor(Math.random() * players.length)]
+        })
+    }
+
+    resetGameHandler = () => {
+        this.setState({
+            stage: 1,
+            players: [],
+            result: ''
+        })
     }
 
     render() {
@@ -50,7 +72,9 @@ class GlobalProvider extends Component {
                     state: this.state,
                     addPlayerHandler: this.addPlayerHandler,
                     removePlayerHandler: this.removePlayerHandler,
-                    next: this.nextHandler
+                    next: this.nextHandler,
+                    getNewLoser: this.generateLoser,
+                    resetGame: this.resetGameHandler
                 }}>
                     {this.props.children}
                 </GlobalContext.Provider>
