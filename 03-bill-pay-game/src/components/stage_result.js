@@ -9,7 +9,13 @@ const StageResult = () =>  {
     <>
       <div className="result_wrapper">
         <h3>The loser is:</h3>
-        <div>{context.state.result}</div>
+        {
+          context.state.result ?  <div>{context.state.result}</div> :  <div class="spinner-border m-5" role="status"><span class="sr-only m-5"></span>
+          </div>
+        }
+       
+       
+          
         <div className="action_button" onClick={() => context.resetGame()}>
           start over
         </div>
